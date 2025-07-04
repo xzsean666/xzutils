@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "xzutils"
-version = "0.1.0"
+version = "0.1.1"
 description = "A versatile Python utility toolkit"
 readme = "README.md"
 requires-python = ">=3.8"
@@ -24,22 +24,31 @@ classifiers = [
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
 ]
-dependencies = [
-    "requests>=2.25.0",
-]
+# 基础包不包含任何外部依赖
+dependencies = []
 
 [project.optional-dependencies]
+# 消息功能需要requests
+message = [
+    "requests>=2.25.0",
+]
+# 开发依赖
 dev = [
     "pytest>=7.0",
     "black>=22.0",
     "flake8>=5.0",
     "mypy>=1.0",
+    "requests>=2.25.0",  # 开发时包含所有依赖
+]
+# 安装所有功能
+all = [
+    "requests>=2.25.0",
 ]
 
 [project.urls]
-Homepage = "https://github.com/xzsean666/xzutils"
-Repository = "https://github.com/xzsean666/xzutils"
-Issues = "https://github.com/xzsean666/xzutils/issues"
+Homepage = "https://github.com/yourusername/xzutils"
+Repository = "https://github.com/yourusername/xzutils"
+Issues = "https://github.com/yourusername/xzutils/issues"
 
 [project.scripts]
 xzutils = "xzutils.core:main"

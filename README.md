@@ -15,32 +15,46 @@ A versatile Python utility toolkit designed to be easily extensible with new too
 ### Using uv (Recommended)
 
 ```bash
-# Install from GitHub
+# 基础安装（只有核心功能）
 uv pip install git+https://github.com/yourusername/xzutils.git
 
-# Or clone and install locally
+# 安装特定功能模块
+uv pip install git+https://github.com/yourusername/xzutils.git[message]  # 消息功能
+uv pip install git+https://github.com/yourusername/xzutils.git[all]      # 所有功能
+
+# 安装多个功能
+uv pip install git+https://github.com/yourusername/xzutils.git[message,dev]
+
+# 本地开发安装
 git clone https://github.com/yourusername/xzutils.git
 cd xzutils
-uv pip install -e .
-
-# Install with development dependencies
-uv pip install -e .[dev]
+uv pip install -e .[dev]  # 开发模式，包含所有依赖
 ```
 
 ### Using pip (Traditional)
 
 ```bash
-# Install from GitHub
+# 基础安装
 pip install git+https://github.com/yourusername/xzutils.git
 
-# Local development installation
+# 安装特定功能
+pip install git+https://github.com/yourusername/xzutils.git[message]
+pip install git+https://github.com/yourusername/xzutils.git[all]
+
+# 本地开发
 git clone https://github.com/yourusername/xzutils.git
 cd xzutils
-pip install -e .
-
-# Install with development dependencies
 pip install -e .[dev]
 ```
+
+## Installation Options
+
+| 安装选项    | 说明               | 包含的依赖                 |
+| ----------- | ------------------ | -------------------------- |
+| 基础安装    | `xzutils`          | 无外部依赖，仅核心功能     |
+| `[message]` | `xzutils[message]` | requests（Slack 消息功能） |
+| `[all]`     | `xzutils[all]`     | 所有功能的依赖             |
+| `[dev]`     | `xzutils[dev]`     | 开发工具 + 所有功能依赖    |
 
 ## Usage
 
@@ -223,6 +237,13 @@ uv add --dev pytest-cov  # for development dependency
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Changelog
+
+### v0.1.1
+
+- Added modular installation with optional dependencies
+- Message utilities with Slack webhook support
+- Improved error handling for missing dependencies
+- Enhanced documentation and examples
 
 ### v0.1.0
 

@@ -6,12 +6,20 @@ from unittest.mock import Mock, patch
 
 import pytest
 
-from xzutils.message import sendMessage
+
+def test_sendMessage_import():
+    """Test that sendMessage can be imported directly from xzutils."""
+    from xzutils import sendMessage
+
+    assert callable(sendMessage)
 
 
+@patch("xzutils.message.slackMessage._HAS_REQUESTS", True)
 @patch("xzutils.message.slackMessage.requests.post")
-def test_sendMessage(mock_post):
-    """Test the sendMessage function."""
+def test_sendMessage_with_requests(mock_post):
+    """Test the sendMessage function when requests is available."""
+    from xzutils.message import sendMessage
+
     # Mock the response
     mock_response = Mock()
     mock_response.status_code = 200
@@ -31,8 +39,14 @@ def test_sendMessage(mock_post):
     assert response == mock_response
 
 
-def test_sendMessage_import():
-    """Test that sendMessage can be imported directly from xzutils."""
-    from xzutils import sendMessage
+@patch("xzutils.message.slackMessage._HAS_REQUESTS", False)
+def test_sendMessage_without_requests():
+    """Test the sendMessage function when requests is not available."""
+    from xzutils.message import sendMessage
 
-    assert callable(sendMessage)
+    webhook = "https://hooks.slack.com/test"
+    message = "Test message"
+
+    # Should raise ImportError
+    with pytest.raises(ImportError, match="requests.*library is required"):
+        sendMessage(webhook, message)
