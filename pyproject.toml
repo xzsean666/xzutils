@@ -37,9 +37,9 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/yourusername/xzutils"
-Repository = "https://github.com/yourusername/xzutils"
-Issues = "https://github.com/yourusername/xzutils/issues"
+Homepage = "https://github.com/xzsean666/xzutils"
+Repository = "https://github.com/xzsean666/xzutils"
+Issues = "https://github.com/xzsean666/xzutils/issues"
 
 [project.scripts]
 xzutils = "xzutils.core:main"
